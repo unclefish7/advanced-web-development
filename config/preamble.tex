@@ -1,0 +1,150 @@
+% 编译引擎与字体 -------------------------------------------------
+\usepackage{fontspec}
+\setmainfont{TeX Gyre Termes}
+\setsansfont{TeX Gyre Heros}
+\setmonofont{Noto Sans Mono CJK SC}
+\setCJKmainfont{Noto Serif CJK SC}
+\setCJKsansfont{Noto Sans CJK SC}
+\setCJKmonofont{Noto Sans Mono CJK SC}
+\setCJKfamilyfont{zhkai}{AR PL KaitiM GB}
+\newcommand{\kaiti}{\CJKfamily{zhkai}}
+
+% 页面与段落 -----------------------------------------------------
+\usepackage[a4paper, top=2.6cm, bottom=2.6cm, left=2.8cm, right=2.8cm,
+            headheight=15pt, headsep=0.7cm, footskip=1.0cm]{geometry}
+\usepackage{setspace}
+\onehalfspacing
+\setlength{\parindent}{2em}
+\setlength{\parskip}{0pt}
+\raggedbottom
+
+\ctexset{
+  section = {
+    format = \centering\zihao{3}\bfseries,
+    beforeskip = 1.6ex plus .4ex minus .2ex,
+    afterskip = 1.2ex plus .2ex
+  },
+  subsection = {
+    format = \zihao{4}\bfseries,
+    beforeskip = 1.3ex plus .3ex minus .2ex,
+    afterskip = .8ex plus .2ex
+  },
+  subsubsection = {
+    format = \zihao{-4}\bfseries,
+    beforeskip = 1.0ex plus .2ex,
+    afterskip = .5ex
+  }
+}
+
+% 页眉页脚 -------------------------------------------------------
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\zihao{-5}\CourseName\ 课程论文}
+\fancyhead[R]{\zihao{-5}\PaperShortTitle}
+\fancyfoot[C]{\zihao{-5}\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+\fancypagestyle{plain}{
+  \fancyhf{}
+  \fancyfoot[C]{\zihao{-5}\thepage}
+  \renewcommand{\headrulewidth}{0pt}
+}
+
+% 数学、图表与列表 -----------------------------------------------
+\usepackage{amsmath, amssymb, mathtools}
+\usepackage{graphicx}
+\graphicspath{{figures/}}
+\usepackage{booktabs, longtable, tabularx, multirow, array}
+\usepackage{float}
+\usepackage{caption}
+\usepackage{subcaption}
+\captionsetup{font=small, labelsep=quad}
+\captionsetup[figure]{name=图}
+\captionsetup[table]{name=表}
+\usepackage{enumitem}
+\setlist{nosep, leftmargin=2em}
+
+% 代码 -----------------------------------------------------------
+\usepackage{xcolor}
+\definecolor{codebg}{HTML}{F6F8FA}
+\definecolor{codecomment}{HTML}{57606A}
+\definecolor{codekeyword}{HTML}{8250DF}
+\definecolor{codestring}{HTML}{0A3069}
+\usepackage{listings}
+\lstset{
+  basicstyle=\small\ttfamily,
+  backgroundcolor=\color{codebg},
+  keywordstyle=\color{codekeyword}\bfseries,
+  commentstyle=\color{codecomment},
+  stringstyle=\color{codestring},
+  numbers=left,
+  numberstyle=\scriptsize\color{codecomment},
+  frame=single,
+  rulecolor=\color{black!15},
+  breaklines=true,
+  showstringspaces=false,
+  tabsize=2,
+  columns=fullflexible
+}
+
+% 参考文献：GB/T 7714—2015，顺序编码制 ---------------------------
+\usepackage{csquotes}
+\usepackage[
+  backend=biber,
+  style=gb7714-2015,
+  sorting=none,
+  maxbibnames=99,
+  giveninits=true
+]{biblatex}
+
+% 超链接应放在大多数宏包之后加载 ---------------------------------
+\usepackage{xurl}
+\usepackage[
+  colorlinks=true,
+  linkcolor=black,
+  citecolor=black,
+  urlcolor=blue!55!black,
+  bookmarksnumbered=true,
+  pdfstartview=FitH
+]{hyperref}
+\urlstyle{same}
+\usepackage[capitalise, noabbrev]{cleveref}
+\crefname{figure}{图}{图}
+\crefname{table}{表}{表}
+\crefname{equation}{式}{式}
+\crefname{section}{节}{节}
+
+% 写作阶段提示 ---------------------------------------------------
+\usepackage[most]{tcolorbox}
+\newif\ifdraftmode
+\draftmodetrue
+\newtcolorbox{guidancebox}{
+  colback=blue!3,
+  colframe=blue!35!black,
+  boxrule=.5pt,
+  arc=1mm,
+  left=2mm,
+  right=2mm,
+  top=1mm,
+  bottom=1mm,
+  fonttitle=\bfseries,
+  title=写作提示
+}
+\newcommand{\writingguide}[1]{%
+  \ifdraftmode
+    \begin{guidancebox}\small #1\end{guidancebox}
+  \fi
+}
+\newcommand{\placeholder}[1]{%
+  \ifdraftmode\textcolor{blue!55!black}{【#1】}\fi
+}
+
+% PDF 元数据在读取 metadata.tex 后由正文设置，避免中文书签乱码。
+\AtBeginDocument{%
+  \hypersetup{
+    pdftitle={\PaperShortTitle},
+    pdfauthor={\AuthorName},
+    pdfsubject={\TrackNameEN}
+  }
+}
