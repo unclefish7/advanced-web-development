@@ -55,6 +55,8 @@
 \usepackage{amsmath, amssymb, mathtools}
 \usepackage{graphicx}
 \graphicspath{{figures/}}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta, positioning}
 \usepackage{booktabs, longtable, tabularx, multirow, array}
 \usepackage{float}
 \usepackage{caption}
@@ -97,6 +99,7 @@
   maxbibnames=99,
   giveninits=true
 ]{biblatex}
+\AtBeginBibliography{\small}
 
 % 超链接应放在大多数宏包之后加载 ---------------------------------
 \usepackage{xurl}
@@ -145,6 +148,6 @@
   \hypersetup{
     pdftitle={\PaperShortTitle},
     pdfauthor={\AuthorName},
-    pdfsubject={\TrackNameEN}
+    pdfsubject={搜索与检索增强人工智能}
   }
 }

@@ -15,6 +15,9 @@
 *.xdv
 main.pdf
 
+# Downloaded research/cache files (keep tmp/requirements.png tracked)
+tmp/research-cache/
+
 # Editor and OS files
 *~
 .DS_Store
